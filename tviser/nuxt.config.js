@@ -29,7 +29,10 @@ module.exports = {
         {src: '~plugins/bootstrap-vue', ssr: true},
         {src: '~plugins/swiper', ssr: false},
         {src: '~plugins/bus', ssr: true},
-        {src: '~plugins/mixins/user.js', ssr: true }
+        {src: '~plugins/mixins/user.js', ssr: true},
+        {src: '~plugins/components.js', ssr: true},
+        {src: '~plugins/autocomplete.js', ssr: true},
+        {src: '~plugins/vue-select.js', ssr: false},
     ],
     css: [
         {src: '~assets/scss/app.scss', lang: 'scss'},
@@ -41,8 +44,8 @@ module.exports = {
             {
                 noPrefixDefaultLocale: true,
                 locales: [
-                    { code: 'en', iso: 'en-US', file: 'en.json' },
-                    { code: 'ru', iso: 'es-ES', file: 'ru.json' }
+                    {code: 'en', iso: 'en-US', file: 'en.json'},
+                    {code: 'ru', iso: 'es-ES', file: 'ru.json'}
                 ],
                 defaultLocale: 'en',
                 vueI18n: {
@@ -60,23 +63,21 @@ module.exports = {
         baseURL: 'http://tviser.loc/api'
     },
     auth: {
+        redirect:false,
         strategies: {
             local: {
                 endpoints: {
-                    login: { url: 'login', method: 'post', propertyName: 'meta.token' },
-                    user: { url: 'user', method: 'get', propertyName: 'data' },
-                    logout: { url: 'logout', method: 'post' }
+                    login: {url: 'login', method: 'post', propertyName: 'meta.token'},
+                    user: {url: 'user', method: 'get', propertyName: 'data'},
+                    logout: {url: 'logout', method: 'post'}
                 }
             }
-        }
+        },
     },
     svgSprite: {
         input: '~/assets/svg/'
     },
     build: {
-        /*
-        ** Run ESLint on save
-        */
         extend(config, {isDev, isClient}) {
             if (isDev && isClient) {
                 config.module.rules.push({

@@ -9,8 +9,6 @@
         </div>
         <div v-if="active">
             <PageTransitioner/>
-            <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-            <nuxt-link :to="switchLocalePath('ru')">Russian</nuxt-link>
             <Header/>
             <nuxt/>
             <Footer/>

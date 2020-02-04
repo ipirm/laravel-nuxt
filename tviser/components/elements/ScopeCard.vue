@@ -1,12 +1,12 @@
 <template>
-    <a :href="localePath(`/scope/${id}`)" class="scope-card" @click.prevent="$bus.goTo(`/scope/${id}`,$router,localePath)">
+    <link-i18n :to="`/scope/${id}`"  class="scope-card">
         <div class="scope-card-header">
             <svg-icon name="work" style="width: 70px;height: 60px"/>
         </div>
         <div class="scope-card-body">
             <span>Web-design</span>
         </div>
-    </a>
+    </link-i18n>
 </template>
 
 <script>

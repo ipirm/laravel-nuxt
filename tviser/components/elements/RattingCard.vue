@@ -26,10 +26,9 @@
             <a href="#" @click.prevent>Смотреть все</a>
         </div>
         <div class="ratting-card-footer">
-            <a class="ratting-card-btn" :href='localePath(`/profile/${id}`)'
-               @click.prevent="$bus.goTo(`/profile/${id}`,$router,localePath)">
+            <link-i18n class="ratting-card-btn" :to="`/profile/${id}`">
                 <span>Показать профиль</span>
-            </a>
+            </link-i18n>
         </div>
     </div>
 

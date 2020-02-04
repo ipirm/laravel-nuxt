@@ -1,13 +1,5 @@
 <template>
     <div class="container-fluid main-swiper">
-        <div class="container">
-            <p v-if="loggedIn">
-                Hello {{ user.name }}
-            </p>
-            <p v-if="!loggedIn">
-                Please sign in
-            </p>
-        </div>
         <div class="row">
             <div v-swiper:mainSwiper="swiperOption">
                 <div class="swiper-wrapper">
@@ -24,12 +16,16 @@
                 <div class="main-swiper-card-header">
                     <span>Tviser - Найди работу своей мечты!</span>
                 </div>
-                <div class="main-swiper-card-body">
-                    <input type="text" placeholder="Услуга или специалист">
+                <div class="main-swiper-card-body mb-1">
+                    <v-select
+                            placeholder="Услуга или специалист"
+                            :options ="scopes"
+                    />
                     <a href="#" class="main-swiper-btn">
                         <span>Приступить</span>
                     </a>
                 </div>
+                <span class="left-col-footer-text ml-1">Пример: <b>Услуга или специалист</b></span>
             </div>
         </div>
     </div>
@@ -51,9 +47,21 @@
                     centeredSlides: true,
                     spaceBetween: 30,
                     effect: 'fade',
-                }
+                },
+                options:[
+                    {id: 100, title: 'title1'},
+                    {id: 101, title: 'title2'},
+                    {id: 102, title: 'title3'},
+                    {id: 103, title: 'title4'},
+                    {id: 104, title: 'title5'},
+                ]
             }
         },
+        computed:{
+            scopes(){
+                return this.options.map(item => item.title)
+            }
+        }
     }
 </script>
 

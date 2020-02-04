@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="swiper-navs">
-                <a href="JavaScript:void(0);" class="swiper-button-next"></a>
-                <a href="JavaScript:void(0);" class="swiper-button-prev"></a>
+                <a href="#" class="swiper-button-next" @click.prevent></a>
+                <a href="#" class="swiper-button-prev" @click.prevent></a>
             </div>
             <div class="swiper-pagination"></div>
         </div>

@@ -22,7 +22,6 @@
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
                                 <div class="col-md-6">
                                     <input type="email" class="form-control" v-model="userForm.email" required>
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +61,7 @@
                 userForm: {
                     name: '',
                     email: '',
-                    password: ''
+                    password: '',
                 }
             }
         },
@@ -75,9 +74,7 @@
                         password: this.userForm.password
                     }
                 })
-                this.$router.push({
-                    path: '/'
-                });
+                this.$router.push(this.localePath('/'));
             }
         }
     }

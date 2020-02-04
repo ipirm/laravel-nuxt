@@ -33,7 +33,7 @@
         created() {
             this.getOrders();
 
-            
+
         },
         data() {
             return {

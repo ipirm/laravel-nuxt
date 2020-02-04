@@ -12,8 +12,8 @@
             </div>
         </div>
         <div class="scope-swiper-navs">
-            <a href="JavaScript:void(0);" class="scope-button-next"></a>
-            <a href="JavaScript:void(0);" class="scope-button-prev"></a>
+            <a href="#" @click.prevent class="scope-button-next"></a>
+            <a href="#" @click.prevent class="scope-button-prev"></a>
         </div>
     </div>
 </template>

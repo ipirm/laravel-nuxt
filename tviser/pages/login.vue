@@ -9,7 +9,8 @@
                             <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" v-model="userForm.email" required autofocus>
+                                    <input id="email" type="email" class="form-control" name="email"
+                                           v-model="userForm.email" required autofocus>
                                     <span class="invalid-feedback" role="alert">
                                             <strong></strong>
                                         </span>
@@ -20,7 +21,8 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" name="password" type="password" v-model="userForm.password" class="form-control" required>
+                                    <input id="password" name="password" type="password" v-model="userForm.password"
+                                           class="form-control" required>
                                     <span class="invalid-feedback" role="alert">
                                             <strong></strong>
                                         </span>
@@ -44,6 +46,7 @@
 
 <script>
     export default {
+        middleware: 'check',
         data() {
             return {
                 userForm: {
@@ -54,13 +57,10 @@
         },
         methods: {
             async addUser() {
-                console.log(this.userForm);
                 await this.$auth.login({
                     data: this.userForm
                 });
-                this.$router.push({
-                    path: '/'
-                });
+                this.$router.push(this.localePath('/'));
             }
         }
     }
