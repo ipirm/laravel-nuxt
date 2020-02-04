@@ -32,6 +32,8 @@
         components: {Spinner},
         created() {
             this.getOrders();
+
+            
         },
         data() {
             return {
