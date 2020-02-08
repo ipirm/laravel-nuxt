@@ -102,22 +102,17 @@
         },
         methods: {
             async registerUser() {
-                this.userForm.roles = this.$route.query.type
+                this.userForm.roles = this.$route.query.type;
                 await this.$axios.post('register', this.userForm);
                 this.$auth.login({
                     data: {
                         email: this.userForm.email,
                         password: this.userForm.password
                     }
-                })
-                this.$router.push(this.localePath('/'));
+                }).then(() => this.$router.push(this.localePath('/')));
             },
             changeTabs(item) {
-                if (item.to === 'specialist') {
-                    this.$router.push({query: {type: item.to}});
-                } else {
-                    this.$router.push({query: {type: item.to}});
-                }
+                item.to === 'specialist' ? this.$router.push({query: {type: item.to}}) : this.$router.push({query: {type: item.to}});
             },
         }
     }
