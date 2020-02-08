@@ -22,17 +22,17 @@
                         </div>
                         <div class="login-tabs-body" v-if="this.$route.query.type === 'specialist'">
                             <form @submit.prevent="registerUser" ref="registrationForm">
-                                <input type="text" placeholder="Фамилия" v-model="userForm.surname">
+                                <input type="text" placeholder="Фамилия" v-model="userForm.surname" required>
                                 <div class="d-flex">
                                     <input type="text" placeholder="Имя" style="margin-right: 5px"
-                                           v-model="userForm.name">
-                                    <input type="text" placeholder="Отчество" v-model="userForm.patronymic">
+                                           v-model="userForm.name" required>
+                                    <input type="text" placeholder="Отчество" v-model="userForm.patronymic" required>
                                 </div>
-                                <input type="text" placeholder="Электроная почта" v-model="userForm.email">
-                                <input type="password" placeholder="Пароль" v-model="userForm.password">
-                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number">
+                                <input type="text" placeholder="Электроная почта" v-model="userForm.email" required>
+                                <input type="password" placeholder="Пароль" v-model="userForm.password" required>
+                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number" required>
                                 <div class="form-group">
-                                    <input type="checkbox" id="policy">
+                                    <input type="checkbox" id="policy" required>
                                     <label for="policy"><span>Принимаю условия политикиконфеденциальности</span></label>
                                 </div>
                                 <div class="login-tabs-footer">
@@ -44,17 +44,15 @@
                         </div>
                         <div class="login-tabs-body" v-if="this.$route.query.type === 'company'">
                             <form @submit.prevent="registerUser" ref="registrationForm">
-                                <input type="text" placeholder="Фамилия" v-model="userForm.surname">
                                 <div class="d-flex">
-                                    <input type="text" placeholder="Имя" style="margin-right: 5px"
-                                           v-model="userForm.name">
-                                    <input type="text" placeholder="Отчество" v-model="userForm.patronymic">
+                                    <input type="text" placeholder="Название Компании" style="margin-right: 5px"
+                                           v-model="userForm.name" required>
                                 </div>
-                                <input type="text" placeholder="Электроная почта" v-model="userForm.email">
-                                <input type="password" placeholder="Пароль" v-model="userForm.password">
-                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number">
+                                <input type="text" placeholder="Электроная почта" v-model="userForm.email" required>
+                                <input type="password" placeholder="Пароль" v-model="userForm.password" required>
+                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number" required>
                                 <div class="form-group">
-                                    <input type="checkbox" id="policy2">
+                                    <input type="checkbox" id="policy2" required>
                                     <label for="policy2"><span>Принимаю условия политикиконфеденциальности</span></label>
                                 </div>
                                 <div class="login-tabs-footer">
