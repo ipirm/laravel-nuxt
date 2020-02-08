@@ -1,52 +1,69 @@
-// register.vue
-
 <template>
-    <div class="container top">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Register</div>
-
-                    <div class="card-body">
-                        <form @submit.prevent="registerUser">
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" v-model="userForm.name" required autofocus>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
-                                    </span>
+    <div class="overlay-login">
+        <div class="container">
+            <div class="row">
+                <div class="right-col">
+                    <div class="right-col-text">
+                        <span>Найди работникав любой сферевсего за пару кликов!</span>
+                    </div>
+                </div>
+                <div class="left-col">
+                    <div class="login-tabs">
+                        <div class="login-tabs-nav">
+                            <a
+                                    href="#"
+                                    v-for="item in loginTabs"
+                                    :key="item.id"
+                                    @click.prevent="changeTabs(item)"
+                                    :class="['login-tabs-item', item.to === $route.query.type ? 'active-tab' : '']"
+                            >
+                                {{ item.text}}
+                            </a>
+                        </div>
+                        <div class="login-tabs-body" v-if="this.$route.query.type === 'specialist'">
+                            <form @submit.prevent="registerUser" ref="registrationForm">
+                                <input type="text" placeholder="Фамилия" v-model="userForm.surname">
+                                <div class="d-flex">
+                                    <input type="text" placeholder="Имя" style="margin-right: 5px"
+                                           v-model="userForm.name">
+                                    <input type="text" placeholder="Отчество" v-model="userForm.patronymic">
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" v-model="userForm.email" required>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
-                                    </span>
+                                <input type="text" placeholder="Электроная почта" v-model="userForm.email">
+                                <input type="password" placeholder="Пароль" v-model="userForm.password">
+                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number">
+                                <div class="form-group">
+                                    <input type="checkbox" id="policy">
+                                    <label for="policy"><span>Принимаю условия политикиконфеденциальности</span></label>
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" v-model="userForm.password" required>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Register
+                                <div class="login-tabs-footer">
+                                    <button type="submit" class="login-tabs-btn">
+                                        <span>Начать регистрацию</span>
                                     </button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <div class="login-tabs-body" v-if="this.$route.query.type === 'company'">
+                            <form @submit.prevent="registerUser" ref="registrationForm">
+                                <input type="text" placeholder="Фамилия" v-model="userForm.surname">
+                                <div class="d-flex">
+                                    <input type="text" placeholder="Имя" style="margin-right: 5px"
+                                           v-model="userForm.name">
+                                    <input type="text" placeholder="Отчество" v-model="userForm.patronymic">
+                                </div>
+                                <input type="text" placeholder="Электроная почта" v-model="userForm.email">
+                                <input type="password" placeholder="Пароль" v-model="userForm.password">
+                                <input type="text" placeholder="Мобильный номер" v-model="userForm.number">
+                                <div class="form-group">
+                                    <input type="checkbox" id="policy2">
+                                    <label for="policy2"><span>Принимаю условия политикиконфеденциальности</span></label>
+                                </div>
+                                <div class="login-tabs-footer">
+                                    <button type="submit" class="login-tabs-btn">
+                                        <span>Начать регистрацию</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,17 +73,38 @@
 
 <script>
     export default {
+        middleware: 'check',
+        created() {
+            this.$router.push({query: {type: 'specialist'}});
+        },
         data() {
             return {
                 userForm: {
-                    name: '',
                     email: '',
                     password: '',
-                }
+                    name: '',
+                    surname: '',
+                    number: '',
+                    patronymic: '',
+                    roles: ''
+                },
+                loginTabs: [
+                    {
+                        id: 1,
+                        text: 'Частный специалист',
+                        to: 'specialist'
+                    },
+                    {
+                        id: 2,
+                        text: 'Компания',
+                        to: 'company'
+                    }
+                ]
             }
         },
         methods: {
             async registerUser() {
+                this.userForm.roles = this.$route.query.type
                 await this.$axios.post('register', this.userForm);
                 this.$auth.login({
                     data: {
@@ -75,13 +113,16 @@
                     }
                 })
                 this.$router.push(this.localePath('/'));
-            }
+            },
+            changeTabs(item) {
+                if (item.to === 'specialist') {
+                    this.$router.push({query: {type: item.to}});
+                } else {
+                    this.$router.push({query: {type: item.to}});
+                }
+            },
         }
     }
 </script>
 
-<style>
-    .top {
-        margin-top: 80px;
-    }
-</style>
+

@@ -16,17 +16,24 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,email|email',
-            'password' => 'required'
+            'password' => 'required',
+            'surname' => 'required',
+            'number' => 'required',
+            'patronymic' => 'required',
+            'roles' => 'required'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'surname' => $request->surname,
+            'number' => $request->number,
+            'patronymic' => $request->patronymic,
+            'roles' => $request->roles,
             'password' => bcrypt($request->password)
         ]);
 
-        if(!$token = auth()->attempt($request->only(['email', 'password'])))
-        {
+        if (!$token = auth()->attempt($request->only(['email', 'password']))) {
             return abort(401);
         }
 
@@ -37,6 +44,7 @@ class AuthController extends Controller
                 ]
             ]);
     }
+
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -44,8 +52,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if(!$token = auth()->attempt($request->only(['email', 'password'])))
-        {
+        if (!$token = auth()->attempt($request->only(['email', 'password']))) {
             return response()->json([
                 'errors' => [
                     'email' => ['There is something wrong! We could not verify details']
@@ -59,10 +66,12 @@ class AuthController extends Controller
                 ]
             ]);
     }
+
     public function user(Request $request)
     {
         return new UserResource($request->user());
     }
+
     public function logout()
     {
         auth()->logout();

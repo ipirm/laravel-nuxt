@@ -63,7 +63,7 @@ module.exports = {
         baseURL: 'http://tviser.loc/api'
     },
     auth: {
-        redirect:false,
+        redirect: false,
         strategies: {
             local: {
                 endpoints: {
