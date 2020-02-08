@@ -16,6 +16,7 @@
                                     :key="item.id"
                                     @click.prevent="changeTabs(item)"
                                     :class="['login-tabs-item', item.to === $route.query.type ? 'active-tab' : '']"
+                                    :style="$route.query.type === 'specialist' ? 'border-radius: 10px 0 0 0;' : 'border-radius: 0 10px 0 0;'"
                             >
                                 {{ item.text}}
                             </a>

@@ -12,16 +12,16 @@
                 <div class="overlay-prices-card" v-for="index in 3" :key="index">
                     <div class="overlay-prices-header">
                         <div class="overlay-prices-price"><span>Basic</span></div>
-                        <a href="JavaScript:void(0);" class="overlay-prices-btn"><span>Choose this plan</span></a>
+                        <a href="#" class="overlay-prices-btn" @click.prevent><span>Choose this plan</span></a>
                         <div class="overlay-prices-date"><b>7.99</b><span>/month</span></div>
                     </div>
                     <div class="overlay-prices-body">
-                      <span>Everything in Basic, and:</span>
+                        <span>Everything in Basic, and:</span>
                         <ul>
-                            <li>Dedicated account managers to help you find  and hire quality talent fast</li>
-                            <li>Dedicated account managers to help you find  and hire quality talent fast</li>
-                            <li>Dedicated account managers to help you find  and hire quality talent fast</li>
-                            <li>Dedicated account managers to help you find  and hire quality talent fast</li>
+                            <li>Dedicated account managers to help you find and hire quality talent fast</li>
+                            <li>Dedicated account managers to help you find and hire quality talent fast</li>
+                            <li>Dedicated account managers to help you find and hire quality talent fast</li>
+                            <li>Dedicated account managers to help you find and hire quality talent fast</li>
                         </ul>
                     </div>
                 </div>
