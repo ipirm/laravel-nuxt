@@ -46,7 +46,7 @@
                         <div class="login-tabs-body" v-if="this.$route.query.type === 'company'">
                             <form @submit.prevent="registerUser" ref="registrationForm">
                                 <div class="d-flex">
-                                    <input type="text" placeholder="Название Компании" style="margin-right: 5px"
+                                    <input type="text" placeholder="Название Компании"
                                            v-model="userForm.name" required>
                                 </div>
                                 <input type="text" placeholder="Электроная почта" v-model="userForm.email" required>
